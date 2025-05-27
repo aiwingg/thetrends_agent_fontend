@@ -1,0 +1,16 @@
+name: voice-assistant
+services:
+- name: web
+  github:
+    branch: agent-for-conference
+    deploy_on_push: true
+    repo: aiwingg/vtd_livekit
+  source_dir: frontend
+  build_command: pnpm install && pnpm run build
+  run_command: pnpm start
+  http_port: 3000
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  envs:
+  - key: NODE_ENV
+    value: production
