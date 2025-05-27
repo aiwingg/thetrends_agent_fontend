@@ -2,10 +2,9 @@ name: voice-assistant
 services:
 - name: web
   github:
-    branch: agent-for-conference
+    branch: main
     deploy_on_push: true
-    repo: aiwingg/vtd_livekit
-  source_dir: frontend
+    repo: aiwingg/thetrends_agent_frontend
   build_command: pnpm install && pnpm run build
   run_command: pnpm start
   http_port: 3000
