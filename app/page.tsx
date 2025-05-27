@@ -12,6 +12,14 @@ const config: VoiceAssistantConfig = {
   },
 };
 
+const languages = [
+  { code: 'ru', name: 'Russian', flag: '🇷🇺' },
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'pt-BR', name: 'Brazilian Portuguese', flag: '🇧🇷' },
+  { code: 'zh', name: 'Chinese', flag: '🇨🇳' },
+  { code: 'hi', name: 'Hindi', flag: '🇮🇳' },
+];
+
 export default function Page() {
   const [connectionDetails, setConnectionDetails] = useState<GeneralConnectionDetails | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,8 +28,9 @@ export default function Page() {
   const [microphonePermission, setMicrophonePermission] = useState<'granted' | 'denied' | 'prompt'>('prompt');
   const [disconnectFunction, setDisconnectFunction] = useState<(() => void) | null>(null);
   const [isStarting, setIsStarting] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('ru'); // Default to Russian
 
-  const fetchConnectionDetails = useCallback(async () => {
+  const fetchConnectionDetails = useCallback(async (language: string) => {
     try {
       setIsLoading(true);
       setError(null);
@@ -30,6 +39,9 @@ export default function Page() {
         process.env.NEXT_PUBLIC_TOKEN_SERVER_URL ?? "http://localhost:8000/api/connection-details",
         window.location.origin
       );
+      
+      // Add language parameter to the request
+      url.searchParams.append('language', language);
       
       console.log("SERVER URL ", url);
       const response = await fetch(url.toString());
@@ -71,8 +83,8 @@ export default function Page() {
   const handleStartConversation = async () => {
     try {
       setIsStarting(true);
-      // Fetch new connection details before starting conversation
-      await fetchConnectionDetails();
+      // Fetch new connection details before starting conversation with selected language
+      await fetchConnectionDetails(selectedLanguage);
       setIsConnected(true);
     } catch (err) {
       console.error('Failed to start conversation:', err);
@@ -117,6 +129,24 @@ export default function Page() {
                 <p className="text-gray-400 text-sm leading-relaxed">
                   Click the button below to start talking with our AI voice agent
                 </p>
+              </div>
+
+              {/* Language Selection */}
+              <div className="mb-6">
+                <label className="block text-white text-sm font-medium mb-3">
+                  Select Language
+                </label>
+                <select
+                  value={selectedLanguage}
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                  className="w-full py-3 px-4 bg-gray-700 border border-gray-600 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  {languages.map((lang) => (
+                    <option key={lang.code} value={lang.code}>
+                      {lang.flag} {lang.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Buttons */}
@@ -175,7 +205,7 @@ export default function Page() {
                     Error: {error}
                   </div>
                   <button 
-                    onClick={fetchConnectionDetails}
+                    onClick={() => fetchConnectionDetails(selectedLanguage)}
                     className="mt-2 w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm"
                   >
                     Retry
