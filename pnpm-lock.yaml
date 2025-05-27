@@ -44,6 +44,9 @@ importers:
       retell-client-js-sdk:
         specifier: ^2.0.7
         version: 2.0.7
+      sycoraxai-voice-assistants:
+        specifier: ^1.1.0
+        version: 1.1.0(@livekit/components-react@2.9.3(@livekit/krisp-noise-filter@0.2.16(livekit-client@2.11.4))(livekit-client@2.11.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tslib@2.8.1))(livekit-client@2.11.4)(react@18.3.1)
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.17
@@ -1709,6 +1712,13 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  sycoraxai-voice-assistants@1.1.0:
+    resolution: {integrity: sha512-GWD+xBttBheocp3aIzB1m9BL4hooxG2/4heAxghRN9QJWPzVAfTVVKS/HMgPtK97UNdEZW61yDuCmh5Rv5e3eg==}
+    peerDependencies:
+      '@livekit/components-react': ^2.9.3
+      livekit-client: ^2.8.0
+      react: ^18.3.1
 
   tailwindcss@3.4.17:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
@@ -3718,6 +3728,12 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  sycoraxai-voice-assistants@1.1.0(@livekit/components-react@2.9.3(@livekit/krisp-noise-filter@0.2.16(livekit-client@2.11.4))(livekit-client@2.11.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tslib@2.8.1))(livekit-client@2.11.4)(react@18.3.1):
+    dependencies:
+      '@livekit/components-react': 2.9.3(@livekit/krisp-noise-filter@0.2.16(livekit-client@2.11.4))(livekit-client@2.11.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tslib@2.8.1)
+      livekit-client: 2.11.4
+      react: 18.3.1
 
   tailwindcss@3.4.17:
     dependencies:
